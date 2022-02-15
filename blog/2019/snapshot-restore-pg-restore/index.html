@@ -2,7 +2,7 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
-<title>A Milestone - Hmerac</title>
+<title>Snapshot Restore versus pg_restore – Time Comparison - Hmerac</title>
 <meta name=HandheldFriendly content="True">
 <meta name=MobileOptimized content="320">
 <meta name=referrer content="no-referrer">
@@ -10,16 +10,16 @@
 <meta property="og:site_name" content="Hmerac">
 <meta property="og:locale" content="nn_NO">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://mertacikportali.com/blog/2020/a-milestone/">
-<meta property="og:title" content="A Milestone">
-<meta property="og:image" content="https://mertacikportali.com/img/2020/skyline.jpg">
+<meta property="og:url" content="https://mertacikportali.com/blog/2019/snapshot-restore-pg-restore/">
+<meta property="og:title" content="Snapshot Restore versus pg_restore – Time Comparison">
+<meta property="og:image" content="https://mertacikportali.com/img/meta/hmerac.png">
 <meta property="og:description" content="Automating Stuff">
 <meta property="twitter:site" content="@mertacikportali">
-<meta property="twitter:title" content="A Milestone">
-<meta property="twitter:image" content="https://mertacikportali.com/img/2020/skyline.jpg">
+<meta property="twitter:title" content="Snapshot Restore versus pg_restore – Time Comparison">
+<meta property="twitter:image" content="https://mertacikportali.com/img/meta/hmerac.png">
 <meta property="twitter:card" content="summary">
 <meta property="twitter:description" content="Automating Stuff">
-<link rel=canonical href=https://mertacikportali.com/blog/2020/a-milestone/>
+<link rel=canonical href=https://mertacikportali.com/blog/2019/snapshot-restore-pg-restore/>
 <link href=//cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css rel=stylesheet integrity=sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x crossorigin=anonymous>
 <link rel=stylesheet href=https://mertacikportali.com/css/main.css>
 <link rel=stylesheet href=https://mertacikportali.com/css/highlight.css>
@@ -62,19 +62,28 @@ Blog
 <div class="row justify-content-center">
 <div class="col-md-9 col-lg-9">
 <h1 class="mx-0 mx-md-4">
-A Milestone
+Snapshot Restore versus pg_restore – Time Comparison
 </h1>
 <div class="mb-4 mb-md-5 meta">
-<span class=date title="Thu Jan 23 2020 00:00:00 UTC">
-January 23, 2020
+<span class=date title="Wed Mar 13 2019 00:00:00 UTC">
+March 13, 2019
 </span>
 <span class="reading-time middot">
-3 minutes
+4 minutes
 </span>
 <div class="d-none d-md-inline tags">
 <ul class="list-unstyled d-inline">
 <li class="d-inline middot">
-<a href=/tags/personal>personal</a>
+<a href=/tags/postgres>postgres</a>
+</li>
+<li class="d-inline middot">
+<a href=/tags/database>database</a>
+</li>
+<li class="d-inline middot">
+<a href=/tags/aws>AWS</a>
+</li>
+<li class="d-inline middot">
+<a href=/tags/comparison>comparison</a>
 </li>
 </ul>
 </div>
@@ -84,29 +93,60 @@ January 23, 2020
 </div>
 </div>
 <div class=markdown>
-<p><figure class=progressive><img class="progressive__img progressive--not-loaded" data-progressive=https://mertacikportali.com/img/2020/skyline.jpg src=https://mertacikportali.com/img/2020/low/skyline.jpg alt='alt="image"'></p></figure>
-<p>Hello people!</p>
-<p>It&rsquo;s been a long long time since we were together and there are reasons for that. I&rsquo;d like to give you some updates about myself.</p>
-<h1 id=1>#1</h1>
-<p>Where to start&mldr; Okay. On October, I felt like I needed to take AWS Solutions Architect &ndash; Professional certificate. Well, at least some sort of certificate which verifies my cloud knowledge. I studied for two straight months and wasn&rsquo;t even ready on the exam day. You can check my notes here: <a href=https://github.com/Hmerac/AWSCSAProNotes>https://github.com/Hmerac/AWSCSAProNotes</a></p>
-<p>Anyway(somehow!?) I passed the exam and got my certificate. It felt amazing for two days but then the feeling of triumph slowly faded away because I have one more certificate goal which is CKA. I&rsquo;ll take it some time later, but not now. This was the first reason.</p>
-<h1 id=2>#2</h1>
-<p>The second reason is, on November, I decided to search opportunities in Germany actively. There are reasons for that and some of them showed up recently. I&rsquo;m not going to explain recent ones. I wish I could, but there are rules forbidding it(I bet, some of you already figured out it&rsquo;s about my current workplace). Anyway, let&rsquo;s continue with the ones that I can speak of.</p>
-<p>Since the beginning of my career, I&rsquo;ve been aiming to move to Germany. Let me list why:</p>
-<ul>
-<li>I like the way Germany is being governed. I believe discipline, order and law are essential for the people living in a country to feel safe. Don&rsquo;t want to get politic here but Germany is one of the countries where I feel safest and I think this is because Germans have suffered from terrible regimes, faced clashes in their history and they know the importance of keeping things in order. I&rsquo;m displeased to say but these terms, discipline, order and law are becoming blurry in the country I&rsquo;m currently living in. Let me stop before it gets too cheesy. Moving on&mldr;</li>
-<li>German government is aware of global issues that I follow closely and doing researches, taking actions on them. This is important for me because it makes you feel you are moving with the government together towards the same goals. One example could be global warming. They started <a href=https://www.citylab.com/environment/2019/09/germany-forest-summit-restoration-climate-change-fire-beetle/598858/>foresting</a> whole country, taking actions upon
-<a href=https://www.ft.com/content/7493759c-36c3-11ea-a6d3-9a26f8c3cba4>frauds</a>, and doing researches about <a href=https://www.deutsches-klima-konsortium.de/en/climate-topics/gulf-stream-circulation.html>Gulf Stream</a> which I believe is one of the most undervalued part.</li>
-<li>My elders had worked in Germany between ~1950 and ~2010 and a part of my family still lives and works there. Therefore, I know a thing or two about German history, culture and language. Germany is the second country I feel close to.</li>
-<li>I kept the most important reason for the last one. I LOVE BEER!</li>
-</ul>
-<p>For these reasons, I started applying for some job opportunities on November and I started interviewing with Trivago. It was an amazing experience for me because I was amazed about how friendly yet so professional they were. After three interviews, I received an offer and accepted it without any hesitation. I&rsquo;ll share the process I went through from the beginning &lsquo;till the end in another post.</p>
-<p>This, I believe, is a milestone in my career, heck, even in my life.</p>
-<p>Let&rsquo;s see what life brings next!</p>
+<h2 id=summary>Summary</h2>
+<p>I&rsquo;ll just cut to the chase here and give detailed analysis immediately after.</p>
+<p>The time difference between <strong>pg_restoring</strong> an <strong>11GB</strong> sized PostgreSQL database with <strong>159MB pg_dump</strong> file, versus <strong>restoring snapshot</strong> of its <strong>t2.medium</strong> RDS Instance:</p>
+<p><figure class=progressive><img class="progressive__img progressive--not-loaded" data-progressive=https://mertacikportali.com/img/2019/time_table-1.png src=https://mertacikportali.com/img/2019/low/time_table-1.png alt='alt="image"'></p></figure>
+<h2 id=analysis>Analysis</h2>
+<blockquote>
+<p>Important note! The time values are subject to change, because it depends on network, other running processes, intermediary EC2 Instance type etc.</p>
+</blockquote>
+<h3 id=pg_restore>pg_restore</h3>
+<blockquote>
+<p>I used a <strong>t2.medium</strong> SSM Bastion Instance to execute PostgreSQL commands. As I&rsquo;ve mentioned before, provisioning a more powerful EC2 Instance might increase the performance drastically. You can find information about SSM Bastions in <a href=https://www.mertacikportali.com/blog/2019/session-manager-modern-bastion>this page</a>.</p>
+</blockquote>
+<p>Imagine you have a PostgreSQL database named &ldquo;XXX&rdquo;; with <strong>11 GB size</strong>. Don&rsquo;t get distracted with the name, I don&rsquo;t know why I named it &ldquo;XXX&rdquo;; at the first hand, but here we go anyway 🙂</p>
+<p><figure class=progressive><img class="progressive__img progressive--not-loaded" data-progressive=https://mertacikportali.com/img/2019/rds1.png src=https://mertacikportali.com/img/2019/low/rds1.png alt='alt="image"'></p></figure>
+<p>I take dump of it by this <strong>pg_dump</strong> command (check the documentation <a href=https://www.postgresql.org/docs/10/app-pgdump.html>here</a>)</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>PGPASSWORD<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;${PGPASSWORD}&#39;</span> pg_dump -h <span style=color:#e6db74>&#34;restore-test.xxxxxxxxxxxx.eu-central-1.rds.amazonaws.com&#34;</span> -p <span style=color:#ae81ff>54321</span> XXX XXX --format<span style=color:#f92672>=</span>c &amp;gt; xxx.sql
+</code></pre></div><p>And to see how big the file is, I execute;</p>
+<p><figure class=progressive><img class="progressive__img progressive--not-loaded" data-progressive=https://mertacikportali.com/img/2019/rds3-1.png src=https://mertacikportali.com/img/2019/low/rds3-1.png alt='alt="image"'></p></figure>
+<p>You can see that the <strong>xxx.sql</strong> dump file is <strong>159 MB</strong>.</p>
+<blockquote>
+<p><em>The reason why our dump file is smaller than our XXX database is because we take logical backup of the database, therefore, all of those empty pages, old versions of rows, indexes aren&rsquo;t going to be included in the dump file. It is also compressed as default, because we used</em> <em><strong>-format=c</strong></em> <em>option. All that greatly reduced the size.</em></p>
+</blockquote>
+<p>Now, let&rsquo;s restore our database with this dump file by this <strong>pg_restore</strong> command (check documentation <a href=https://www.postgresql.org/docs/9.2/app-pgrestore.html>here</a>)</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>PGPASSWORD<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;${PGPASSWORD}&#39;</span> pg_restore -v -h <span style=color:#e6db74>&#34;restore-test.xxxxxxxxxxxx.eu-central-1.rds.amazonaws.com&#34;</span> -p <span style=color:#ae81ff>5432</span> XXX -d POSTGRESQL -j <span style=color:#ae81ff>4</span> -O -C <span style=color:#e6db74>&#34;xxx.sql&#34;</span>
+</code></pre></div><p>As you can see, I used <strong>time</strong> command with the actual command, so that we can see how long it took;</p>
+<p><figure class=progressive><img class="progressive__img progressive--not-loaded" data-progressive=https://mertacikportali.com/img/2019/rds6.png src=https://mertacikportali.com/img/2019/low/rds6.png alt='alt="image"'></p></figure>
+<p><strong>&ldquo;real&rdquo;</strong> value here is what we must be looking for. Details over <a href=https://stackoverflow.com/questions/556405/what-do-real-user-and-sys-mean-in-the-output-of-time1>here</a>. Not bad, huh? However, it is still 14 minutes of downtime, which I don&rsquo;t recommend for your mental, and probably physical health 🙂 Let&rsquo;s note the value and proceed with <strong>Snapshot Restore</strong> operation.</p>
+<h2 id=snapshot-restore>Snapshot Restore</h2>
+<p>I took a snapshot of our PostgreSQL RDS Instance, which has our prey, XXX database;</p>
+<p><figure class=progressive><img class="progressive__img progressive--not-loaded" data-progressive=https://mertacikportali.com/img/2019/rds4.png src=https://mertacikportali.com/img/2019/low/rds4.png alt='alt="image"'></p></figure>
+<p>At this point, if you&rsquo;ve decided to use snapshot restore operation instead of pg_restore, you&rsquo;re going to need to <strong>change your corrupted RDS Instance&rsquo;s identifier</strong>. Because AWS doesn&rsquo;t allow duplicate RDS identifiers, obviously. I mean, they&rsquo;re identifiers, that&rsquo;s what they do, identify. You can change identifier to, let&rsquo;s say, <strong>&ldquo;original-old&rdquo;;</strong>. So the time it takes to change identifier of a <strong>Multi-AZ</strong> RDS Instance is this;</p>
+<p><figure class=progressive><img class="progressive__img progressive--not-loaded" data-progressive=https://mertacikportali.com/img/2019/rds10.png src=https://mertacikportali.com/img/2019/low/rds10.png alt='alt="image"'></p></figure>
+<p>Quite long. After changing our corrupted RDS Instance&rsquo;s identifier, we can now proceed to <strong>restore our snapshot</strong> and <strong>name it as our original RDS identifier</strong>, so our <strong>applications can automatically connect</strong> to it. Let&rsquo;s see how long it takes to restore a <strong>Multi-AZ</strong> PostgreSQL RDS Instance;</p>
+<p><figure class=progressive><img class="progressive__img progressive--not-loaded" data-progressive=https://mertacikportali.com/img/2019/rds8.png src=https://mertacikportali.com/img/2019/low/rds8.png alt='alt="image"'></p></figure>
+<p><strong>WOW!</strong> This is not good at all. 20 minutes is enough time to make you looking for a new job! Add that <strong>identifier change time(2:21)</strong> to this and you get <strong>22:04</strong> minutes! You might as well take a damn nap while this completes.</p>
+<h2 id=conclusion>Conclusion</h2>
+<p>Obviously, the first thing to do is, enabling Multi-AZ feature of your RDS Instances. Because in case of a failure in an availability zone, AWS will automatically change RDS Instance&rsquo;s DNS to a different RDS Instance in a different availability zone. That way, your RDS Instances are fault tolerant.</p>
+<p>After enabling Multi-AZ feature, I highly recommend taking pg_dumps of your PostgreSQL Databases daily and uploading them to S3. Even if you don&rsquo;t use PostgreSQL, you can adapt this solution to MySQL etc.</p>
+<p>I also highly recommend <a href=https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html>configuring read-replicas</a>(slaves) of the master RDS Instance, if you are swimming in gold and don&rsquo;t feel lazy at all. Because in that case, you can make one of the slaves your master DB and keep your job in some specific disaster scenarios. In addition being a recovery solution for disaster cases, if designed well, it also increases R/W performance drastically.</p>
 </div>
 </div>
 <div class="col-sm-12 col-md-3">
-<nav id=TableOfContents class=sticky-top></nav>
+<nav id=TableOfContents class=sticky-top>
+<ul>
+<li><a href=#summary>Summary</a></li>
+<li><a href=#analysis>Analysis</a>
+<ul>
+<li><a href=#pg_restore>pg_restore</a></li>
+</ul>
+</li>
+<li><a href=#snapshot-restore>Snapshot Restore</a></li>
+<li><a href=#conclusion>Conclusion</a></li>
+</ul>
+</nav>
 </div>
 </div>
 <div class=row>
@@ -115,17 +155,17 @@ January 23, 2020
 <div class=row>
 <div class="col-12 col-md-6">
 <div class="mx-0 mx-md-4 mt-4 text-start">
-<a href=https://mertacikportali.com/blog/2019/snapshot-restore-pg-restore/>
+<a href=https://mertacikportali.com/blog/2019/session-manager-modern-bastion/>
 <span class=icon><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M145.188 238.575l215.5-215.5c5.3-5.3 5.3-13.8.0-19.1s-13.8-5.3-19.1.0l-225.1 225.1c-5.3 5.3-5.3 13.8.0 19.1l225.1 225c2.6 2.6 6.1 4 9.5 4s6.9-1.3 9.5-4c5.3-5.3 5.3-13.8.0-19.1l-215.4-215.5z"/></svg>
 </span>
-<span class=text>Snapshot Restore versus pg_restore – Time Comparison</span>
+<span class=text>Session Manager - Modern Bastion</span>
 </a>
 </div>
 </div>
 <div class="col-12 col-md-6">
 <div class="mx-0 mx-md-4 mt-4 text-end">
-<a href=https://mertacikportali.com/blog/2020/histoday/>
-<span class=text>histoday</span>
+<a href=https://mertacikportali.com/blog/2020/a-milestone/>
+<span class=text>A Milestone</span>
 <span class=icon><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 477.175 477.175"><path d="M360.731 229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1.0s-5.3 13.8.0 19.1l215.5 215.5-215.5 215.5c-5.3 5.3-5.3 13.8.0 19.1 2.6 2.6 6.1 4 9.5 4s6.9-1.3 9.5-4l225.1-225.1C365.931 242.875 365.931 234.275 360.731 229.075z"/></svg>
 </span>
 </a>
